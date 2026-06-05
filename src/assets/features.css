@@ -1,0 +1,11 @@
+.to-do {
+    margin-top: 1rem;
+}
+.to-do li,
+.todo-form {
+    display: grid;
+    grid-template-columns: 2fr 1fr 4fr;
+    row-gap: 1rem;
+    margin-bottom: 1rem;
+    column-gap: 1rem;
+}

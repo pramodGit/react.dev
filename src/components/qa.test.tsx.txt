@@ -1,0 +1,57 @@
+// AccordionList.test.tsx
+import React from 'react';
+import { render, screen, fireEvent } from '@testing-library/react';
+import { AccordionItem } from "../shared/accordian";
+
+// Mock AccordionItem component
+jest.mock('./AccordionItem', () => ({ question, answer, isOpen, onClick }) => (
+  <div
+    data-testid="accordion-item"
+    onClick={onClick}
+    aria-expanded={isOpen}
+  >
+    <h3>{question}</h3>
+    {isOpen && <p>{answer}</p>}
+  </div>
+));
+
+describe('AccordionList', () => {
+  const mockData = [
+    { question: 'Q1', answer: 'A1' },
+    { question: 'Q2', answer: 'A2' },
+    { question: 'Q3', answer: 'A3' }
+  ];
+
+  it('renders all items', () => {
+    const handleItemClick = jest.fn();
+    render(
+      <AccordionItem
+        filtered={mockData}
+        activeIndex={-1}
+        handleItemClick={handleItemClick}
+      />
+    );
+
+    const items = screen.getAllByTestId('accordion-item');
+    expect(items.length).toBe(3);
+    expect(screen.getByText('Q1')).toBeInTheDocument();
+    expect(screen.getByText('Q2')).toBeInTheDocument();
+    expect(screen.getByText('Q3')).toBeInTheDocument();
+  });
+
+  it('toggles item open on click', () => {
+    const handleItemClick = jest.fn();
+    render(
+      <AccordionItem
+        filtered={mockData}
+        activeIndex={0}
+        handleItemClick={handleItemClick}
+      />
+    );
+
+    const firstItem = screen.getAllByTestId('accordion-item')[0];
+    expect(firstItem).toHaveAttribute('aria-expanded', 'true');
+    fireEvent.click(firstItem);
+    expect(handleItemClick).toHaveBeenCalledWith(0);
+  });
+});
