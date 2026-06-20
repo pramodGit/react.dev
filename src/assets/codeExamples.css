@@ -1,0 +1,32 @@
+h2 {
+    font-size: 2.8rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.counter {
+  text-align: center;
+  margin-top: 40px;
+}
+select {
+  margin: 10px;
+  padding: 5px;
+}
+.buttons button {
+  padding: 8px 18px;
+  margin: 5px;
+  font-size: 16px;
+}
+pre {
+  padding: 0;
+  line-height: 1;
+}
+b { line-height: 3rem;}
+.grid-1{
+  display: grid;
+  grid-template-columns: 1fr;
+}
+.grid-2{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
